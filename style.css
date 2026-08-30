@@ -450,7 +450,7 @@ body {
     color: #fff;
 
     font-size: 32px;
-
+    margin-bottom: 10px;
     line-height: 1.8;
 
     text-align: center;
@@ -475,7 +475,8 @@ body {
 .reason.special {
     font-size: 35px;
 
-    min-height: 60vh;
+    margin-top: 100px;
+    margin-bottom: 150px;
 
     display: flex;
 
@@ -550,5 +551,14 @@ body {
         min-height: auto;
         display: block;
     }
-
+   .ending-gif {
+      display: flex;
+      justify-content:center;
+      margin: 80px 0 120 px;
+   }
+   .ending-gif img {
+      width:300px;
+      max-width: 90%;
+      height: auto;
+   }
 }
