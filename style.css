@@ -1,0 +1,554 @@
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   SCREENS
+========================= */
+
+.screen {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: #000;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================
+   MAIN TEXT
+========================= */
+
+.main-text {
+    color: #fff;
+
+    font-size: 42px;
+    font-weight: 400;
+
+    text-align: center;
+
+    padding: 20px;
+}
+
+
+/* =========================
+   INTRO ANIMATIONS
+========================= */
+
+#hello {
+    animation:
+        helloAnimation 3s ease-in-out forwards;
+}
+
+
+#relationship {
+    opacity: 0;
+
+    animation:
+        relationshipAnimation 5s ease-in-out 3s forwards,
+        relationshipFadeOut 0.6s ease-in 11.4s forwards;
+}
+
+
+#joke {
+    opacity: 0;
+
+    animation:
+        jokeAnimation 0.4s ease-out 9s forwards,
+        jokeFadeOut 0.6s ease-in 11.4s forwards;
+}
+
+
+/* =========================
+   HELLO
+========================= */
+
+@keyframes helloAnimation {
+
+    0% {
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   RELATIONSHIP
+========================= */
+
+@keyframes relationshipAnimation {
+
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+@keyframes relationshipFadeOut {
+
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   JOKE
+========================= */
+
+.joke-text {
+    position: absolute;
+
+    margin-top: 110px;
+
+    color: #ff3030;
+
+    font-size: 24px;
+    font-weight: 400;
+
+    direction: ltr;
+
+    text-align: center;
+}
+
+
+@keyframes jokeAnimation {
+
+    0% {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes jokeFadeOut {
+
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   LOVE QUESTION
+========================= */
+
+.question-box {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 25px;
+
+    width: min(90%, 700px);
+
+    text-align: center;
+}
+
+
+.question-text {
+    color: #fff;
+
+    font-size: 38px;
+    font-weight: 400;
+}
+
+
+.number-input {
+    width: 120px;
+    height: 55px;
+
+    background: transparent;
+
+    border: 1px solid #555;
+
+    border-radius: 12px;
+
+    color: #fff;
+
+    font-size: 25px;
+
+    text-align: center;
+
+    outline: none;
+
+    font-family: inherit;
+
+    transition: border-color 0.25s;
+}
+
+
+.number-input:focus {
+    border-color: #fff;
+}
+
+
+.number-input::-webkit-inner-spin-button,
+.number-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+
+    margin: 0;
+}
+
+
+.number-input[type="number"] {
+    appearance: textfield;
+}
+
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+.submit-button {
+    padding: 11px 25px;
+
+    background: transparent;
+
+    border: 1px solid #555;
+
+    border-radius: 10px;
+
+    color: #fff;
+
+    font-size: 16px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s,
+        border-color 0.25s,
+        transform 0.15s;
+}
+
+
+.submit-button:hover {
+    background: #fff;
+
+    color: #000;
+
+    border-color: #fff;
+}
+
+
+.submit-button:active {
+    transform: scale(0.95);
+}
+
+
+/* =========================
+   FEEDBACK
+========================= */
+
+.feedback {
+    max-width: 700px;
+
+    min-height: 30px;
+
+    margin-top: 5px;
+
+    font-size: 21px;
+
+    line-height: 1.7;
+
+    text-align: center;
+
+    opacity: 0;
+}
+
+
+.feedback.show {
+    animation: feedbackAnimation 0.5s ease forwards;
+}
+
+
+@keyframes feedbackAnimation {
+
+    0% {
+        opacity: 0;
+
+        transform: translateY(8px);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   HOW MUCH
+========================= */
+
+.how-much-content {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 50px;
+}
+
+
+.choice-buttons {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    width: 100%;
+}
+
+
+.choice-button {
+    min-width: 100px;
+
+    padding: 14px 30px;
+
+    border-radius: 12px;
+
+    font-family: inherit;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+
+.choice-button.no {
+    background: #fff;
+
+    color: #000;
+
+    border: 1px solid #fff;
+}
+
+
+.choice-button.yes {
+    background: transparent;
+
+    color: #fff;
+
+    border: 1px solid #555;
+
+    position: fixed;
+
+    transition: left .15s ease, top 15s ease;
+}
+
+
+/* =========================
+   REASONS INTRO
+========================= */
+
+#reasonsIntro {
+    opacity: 0;
+}
+
+
+/* =========================
+   REASONS PAGE
+========================= */
+
+.reasons-page {
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding: 30vh 10% 20vh;
+
+    background: #000;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 0;
+}
+
+
+.reason {
+    width: min(850px, 90%);
+
+    color: #fff;
+
+    font-size: 32px;
+
+    line-height: 1.8;
+
+    text-align: center;
+
+    opacity: 0;
+
+    transform: translateY(30px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+
+.reason.visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+.reason.special {
+    font-size: 35px;
+
+    min-height: 60vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.final-reason {
+    margin-top: 10vh;
+
+    font-size: 35px;
+
+    padding-bottom: 20vh;
+}
+
+
+.end-space {
+    height: 20vh;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .main-text {
+        font-size: 30px;
+    }
+
+    .question-text {
+        font-size: 29px;
+    }
+
+    .joke-text {
+        font-size: 20px;
+    }
+
+    .reason {
+        font-size: 25px;
+
+        width: 88%;
+    }
+
+    .reason.special {
+        font-size: 28px;
+    }
+
+    .final-reason {
+        font-size: 27px;
+    }
+
+    .reasons-page {
+        padding-left: 5%;
+        padding-right: 5%;
+
+        gap: 40vh;
+    }
+    .final-reason{
+        margin-top: 25vh;
+    }
+    .reason{
+        margin-top: 50px;
+    }
+    .reason.special{
+        margin-top: 500px;
+        margin-bottom: 300px;
+
+        min-height: auto;
+        display: block;
+    }
+
+}
