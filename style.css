@@ -542,7 +542,7 @@ body {
         margin-top: 25vh;
     }
     .reason{
-        margin-top: 50px;
+        margin-top: 10px;
     }
     .reason.special{
         margin-top: 500px;
@@ -557,6 +557,7 @@ body {
       margin: 80px 0 120 px;
    }
    .ending-gif video {
+      display:block;
       width:300px;
       max-width: 90%;
       height: auto;
