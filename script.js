@@ -177,17 +177,21 @@ function showLoveQuestion() {
 }
 
 
-/*
-   At 12 seconds:
-   intro disappears.
-*/
+/* Start the original story after the heart animation */
 
-setTimeout(() => {
+window.addEventListener("load", () => {
+    const heartSection = document.querySelector(".love-heart");
 
-    showLoveQuestion();
+    setTimeout(() => {
+        heartSection.classList.add("heart-finished");
 
-}, 12000);
+        setTimeout(() => {
+            heartSection.style.display = "none";
+            intro.classList.remove("hidden");
+        }, 1200);
 
+    }, 11000);
+});
 
 /* =====================================================
    CORRECT ANSWER -> NEXT SCREEN
