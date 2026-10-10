@@ -22,74 +22,189 @@
     </section>
 
     <script>
-   <script>
-const loveWords = [
-    "I love you",
-    "دوستت دارم",
-    "Je t’aime",
-    "Te amo",
-    "Ti amo",
-    "Ich liebe dich",
-    "Seni seviyorum",
-    "Я тебя люблю",
-    "愛してる",
-    "사랑해",
-    "我爱你",
-    "أحبك",
-    "Eu te amo",
-    "Ik hou van jou",
-    "Kocham cię",
-    "Mahal kita",
-    "Anh yêu em",
-    "Я тебя кохаю",
-    "Σ’ αγαπώ",
-    "אני אוהב אותך",
-    "รักคุณ"
-];
+    const loveWords = [
+        "دوستت دارم",
+        "عاشقتم",
+        "I love you",
+        "Je t'aime",
+        "Te amo",
+        "Te quiero",
+        "T'estimo",
+        "Ti amo",
+        "Ich liebe dich",
+        "Я тебя люблю",
+        "Я тебе кохаю",
+        "Обичам те",
+        "愛してる",
+        "사랑해",
+        "我爱你",
+        "أحبك",
+        "Seni seviyorum",
+        "Səni sevirəm",
+        "Eu te amo",
+        "Ik hou van jou",
+        "Ek is lief vir jou",
+        "Kocham cię",
+        "Miluji tě",
+        "Milujem ťa",
+        "Volim te",
+        "Ljubim te",
+        "Szeretlek",
+        "Te iubesc",
+        "Të dua",
+        "Σ' αγαπώ",
+        "Jag älskar dig",
+        "Jeg elsker deg",
+        "Jeg elsker dig",
+        "Ég elska þig",
+        "Rakastan sinua",
+        "Es tevi mīlu",
+        "Aš tave myliu",
+        "Ma armastan sind",
+        "Maite zaitut",
+        "Rwy'n dy garu di",
+        "Tá grá agam duit",
+        "Inħobbok",
+        "Mi amas vin",
+        "Aku cinta kamu",
+        "Saya cintakan awak",
+        "Anh yêu em",
+        "Mahal kita",
+        "ฉันรักคุณ",
+        "אני אוהב אותך",
+        "मैं तुमसे प्यार करता हूँ",
+        "আমি তোমাকে ভালোবাসি",
+        "હું તને પ્રેમ કરું છું",
+        "میں تم سے محبت کرتا ہوں",
+        "நான் உன்னை காதலிக்கிறேன்",
+        "నేను నిన్ను ప్రేమిస్తున్నాను",
+        "म तिमीलाई माया गर्छु",
+        "Ես քեզ սիրում եմ",
+        "მე შენ მიყვარხარ",
+        "Hez ji te dikim",
+        "Nakupenda",
+        "Ngiyakuthanda"
+    ];
 
-const heart = document.getElementById("heartWords");
-heart.innerHTML = "";
+    // قلب پُر از کلمه: شکل قلب با منحنی ریاضی، کلمه‌ها اندازه‌گیری و طوری چیده می‌شن که ردیف‌ها کاملاً پُر باشن
+    const heart = document.getElementById("heartWords");
+    const S = heart.clientWidth;
+    const fontPx = Math.max(7.5, S * 0.021);
+    const rowH = fontPx * 1.55;
+    const minGap = fontPx * 0.7;
+    heart.style.fontSize = fontPx + "px";
 
-const rows = [
-    { y: 12, width: 24 },
-    { y: 17, width: 38 },
-    { y: 22, width: 48 },
-    { y: 27, width: 56 },
-    { y: 32, width: 64 },
-    { y: 37, width: 70 },
-    { y: 42, width: 74 },
-    { y: 47, width: 76 },
-    { y: 52, width: 74 },
-    { y: 57, width: 68 },
-    { y: 62, width: 58 },
-    { y: 67, width: 46 },
-    { y: 72, width: 32 },
-    { y: 77, width: 16 }
-];
-
-let wordIndex = 0;
-
-rows.forEach((row, rowIndex) => {
-    const count = Math.max(1, Math.floor(row.width / 10));
-
-    for (let j = 0; j < count; j++) {
-        const word = document.createElement("span");
-        word.className = "heart-word";
-        word.textContent = loveWords[wordIndex % loveWords.length];
-
-        const x = 50 - row.width / 2 +
-            (row.width / count) * (j + 0.5);
-
-        word.style.left = x + "%";
-        word.style.top = row.y + "%";
-        word.style.animationDelay =
-            (wordIndex * 0.08) + "s";
-
-        heart.appendChild(word);
-        wordIndex++;
+    // چندضلعی قلب (لوب‌های گرد)
+    const k = S * 0.94 / 32;
+    const poly = [];
+    for (let i = 0; i < 600; i++) {
+        const t = (i / 600) * 2 * Math.PI;
+        const x = 16 * Math.pow(Math.sin(t), 3);
+        const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+        poly.push([S / 2 + x * k, S / 2 - (y + 2.5) * k]);
     }
-});
-</script>
+    function inside(px, py) {
+        let c = false;
+        for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+            const [xi, yi] = poly[i], [xj, yj] = poly[j];
+            if ((yi > py) !== (yj > py) && px < (xj - xi) * (py - yi) / (yj - yi) + xi) c = !c;
+        }
+        return c;
+    }
+
+    // اندازه‌گیری عرض هر کلمه
+    const widths = loveWords.map(w => {
+        const m = document.createElement("span");
+        m.className = "heart-word";
+        m.style.cssText = "position:absolute;visibility:hidden;animation:none;opacity:1";
+        m.textContent = w;
+        heart.appendChild(m);
+        const wd = m.getBoundingClientRect().width;
+        heart.removeChild(m);
+        return wd;
+    });
+
+    // ردیف‌ها را بالا تا پایین پیمایش می‌کنیم
+    let cursor = 0, rowIndex = 0, wordCount = 0;
+    const yTop = S / 2 - 17 * k + rowH / 2 - 2.5 * k * 0 ;
+    for (let y = S / 2 - 14.5 * k; y < S / 2 + 17.5 * k - rowH / 2; y += rowH) {
+        const top = y - rowH / 2, bottom = y + rowH / 2;
+        const segs = [];
+        let start = null;
+        for (let x = 0; x <= S; x += 1) {
+            const ok = inside(x, top + 1) && inside(x, bottom - 1) && inside(x, y);
+            if (ok && start === null) start = x;
+            if (!ok && start !== null) { segs.push([start, x]); start = null; }
+        }
+        if (start !== null) segs.push([start, S]);
+
+        segs.forEach(([x0, x1]) => {
+            const W = x1 - x0 - 2;
+            // کلمه‌ها را به ترتیب می‌چینیم تا جا تموم بشه
+            const picked = [];
+            let used = 0;
+            while (true) {
+                const idx = cursor % loveWords.length;
+                const need = widths[idx] + (picked.length ? minGap : 0);
+                if (used + need > W) break;
+                picked.push(idx);
+                used += need;
+                cursor++;
+            }
+            // آخرین کلمه را با مناسب‌ترین کلمه (که بیشترین جا را پُر کند) عوض می‌کنیم
+            if (picked.length) {
+                const lastIdx = picked.pop();
+                used -= widths[lastIdx] + (picked.length ? minGap : 0);
+                const prev = picked.length ? picked[picked.length - 1] : -1;
+                let best = lastIdx, bestUsed = -1;
+                for (let c = 0; c < loveWords.length; c++) {
+                    if (c === prev || picked.includes(c)) continue;
+                    const need = widths[c] + (picked.length ? minGap : 0);
+                    if (used + need <= W && need > bestUsed) { best = c; bestUsed = need; }
+                }
+                picked.push(best);
+            } else {
+                // ردیف خیلی باریک: بزرگ‌ترین کلمه‌ای که جا می‌شود
+                let best = -1;
+                for (let c = 0; c < loveWords.length; c++) {
+                    if (widths[c] <= W && (best < 0 || widths[c] > widths[best])) best = c;
+                }
+                if (best >= 0) picked.push(best);
+            }
+            if (!picked.length) return;
+
+            const row = document.createElement("div");
+            row.className = "heart-row";
+            row.style.left = (x0 + 1) + "px";
+            row.style.width = W + "px";
+            row.style.top = top + "px";
+            row.style.height = rowH + "px";
+            if (picked.length === 1) row.style.justifyContent = "center";
+            picked.forEach(idx => {
+                const word = document.createElement("span");
+                word.className = "heart-word" + (wordCount % 9 === 4 ? " bright" : "");
+                word.textContent = loveWords[idx];
+                const fadeDelay = Math.random() * 5;
+                const twinkleDur = 3 + Math.random() * 4;
+                const twinkleDelay = 5.5 + Math.random() * 2;
+                word.style.animation =
+                    "heartFade 1.2s ease " + fadeDelay + "s forwards, " +
+                    "heartTwinkle " + twinkleDur + "s ease-in-out " + twinkleDelay + "s infinite";
+                row.appendChild(word);
+                wordCount++;
+            });
+            row.style.columnGap = minGap + "px";
+            heart.appendChild(row);
+            // اندازه‌ی واقعی را چک می‌کنیم؛ اگر ردیف سرریز کرد، کلمه‌ی آخر را برمی‌داریم
+            while (row.children.length > 1 && row.scrollWidth > row.clientWidth + 0.5) {
+                row.removeChild(row.lastChild);
+            }
+            if (row.children.length === 1 && row.scrollWidth > row.clientWidth + 0.5) {
+                heart.removeChild(row);
+            }
+        });
+        rowIndex++;
+    }
 </script>
     <!-- =========================
          INTRO
