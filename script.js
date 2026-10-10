@@ -211,6 +211,7 @@ function showHowMuch() {
     yesButton.style.position="static";
     yesButton.style.left="";
     yesButton.style.top="";
+    if (yesPlaceholder) { yesPlaceholder.remove(); yesPlaceholder = null; }
 
     howMuch.classList.remove("hidden");
 
@@ -221,22 +222,48 @@ function showHowMuch() {
    RUNAWAY "YES" BUTTON
 ===================================================== */
 
+let yesPlaceholder = null;
+
 function moveYesButton() {
 
-    yesButton.style.position="fixed";
-    const padding=30;
+    const rect = yesButton.getBoundingClientRect();
 
-    const buttonWidth= yesButton.offsetWidth;  
-    const buttonHeight= yesButton.offsetHeight;
+    /* بار اول: دکمه از جای فعلی‌اش شروع به حرکت کند و جایش خالی نماند */
+    if (yesButton.style.position !== "fixed") {
 
-    const maxX=window.innerWidth - buttonWidth - padding;
-    const maxY=window.innerHeight - buttonHeight - padding;
+        yesPlaceholder = document.createElement("div");
+        yesPlaceholder.style.width = rect.width + "px";
+        yesPlaceholder.style.height = rect.height + "px";
+        yesButton.parentNode.insertBefore(yesPlaceholder, yesButton);
 
-    const randomX = Math.random() * (maxX - padding) + padding;
-    const randomY = Math.random() * (maxY - padding) + padding;
+        yesButton.style.position = "fixed";
+        yesButton.style.left = rect.left + "px";
+        yesButton.style.top = rect.top + "px";
 
-    yesButton.style.left=randomX+ "px";
-    yesButton.style.top=randomY+ "px";
+        void yesButton.offsetWidth;
+    }
+
+    const padding = 20;
+    const w = yesButton.offsetWidth;
+    const h = yesButton.offsetHeight;
+
+    const rangeX = window.innerWidth - w - padding * 2;
+    const rangeY = window.innerHeight - h - padding * 2;
+
+    const curX = rect.left + w / 2;
+    const curY = rect.top + h / 2;
+    const minJump = Math.min(window.innerWidth, window.innerHeight) * 0.35;
+
+    /* یک نقطه‌ی تصادفی در کل صفحه (هم X و هم Y) که از جای فعلی دور باشد */
+    let x, y;
+    for (let i = 0; i < 30; i++) {
+        x = padding + Math.random() * rangeX;
+        y = padding + Math.random() * rangeY;
+        if (Math.hypot(x + w / 2 - curX, y + h / 2 - curY) >= minJump) break;
+    }
+
+    yesButton.style.left = x + "px";
+    yesButton.style.top = y + "px";
 }
 
 
