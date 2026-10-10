@@ -193,6 +193,9 @@ window.addEventListener("load", () => {
     void el.offsetWidth;
     el.style.animation = "";
 });
+   setTimeout(() => {
+    showLoveQuestion();
+}, 12000);
         }, 1200);
 
     }, 11000);
