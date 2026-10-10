@@ -554,7 +554,7 @@ body {
    .ending-gif {
       display: flex;
       justify-content:center;
-      margin: 80px 0 120 px;
+      margin: 80px 0 120px;
    }
    .ending-gif video {
       display:block;
