@@ -562,4 +562,43 @@ body {
       max-width: 90%;
       height: auto;
    }
+   ```css
+.love-heart {
+    min-height: 100vh;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.heart-words {
+    position: relative;
+    width: min(95vw, 560px);
+    height: min(95vw, 560px);
+}
+
+.heart-word {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    color: #ff789f;
+    font-size: clamp(9px, 2.5vw, 17px);
+    white-space: nowrap;
+    opacity: 0;
+    text-shadow: 0 0 8px #ff174f;
+    animation: heartFade 1.2s ease forwards;
+}
+
+@keyframes heartFade {
+    from {
+        opacity: 0;
+        filter: blur(5px);
+        scale: 0.7;
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
+        scale: 1;
+    }
+}
 }
