@@ -22,43 +22,74 @@
     </section>
 
     <script>
-    const words=[
-        [30, 20], [40, 12], [50,17], [60,12], [70,20],[80,32],[76,44],[68,56],[58,68],[50,80],[42,68],[32,56],[24,44],[20,32],[38,28],[52,29],[64,35],[43,43],[57,46],[49,58]
-        ];
-        const heart =document.getElementById("heartWords");
-
-        words.forEach(([x,y],i)=>{
-            const word= document.createElement("span");
-            word.className="heart-word";
-           const loveWords = [
-  "دوستت دارم", // فارسی
-  "I love you", // انگلیسی
-  "Je t'aime", // فرانسوی
-  "Te amo", // اسپانیایی
-  "Ti amo", // ایتالیایی
-  "Ich liebe dich", // آلمانی
-  "Я тебя люблю", // روسی
-  "愛してる", // ژاپنی
-  "사랑해", // کره‌ای
-  "我爱你", // چینی
-  "أحبك", // عربی
-  "Seni seviyorum", // ترکی
-  "Eu te amo", // پرتغالی
-  "Ik hou van jou", // هلندی
-  "Kocham cię", // لهستانی
-  "Mahal kita", // فیلیپینی
-  "אני אוהב אותך", // عبری
-  "আমি তোমাকে ভালোবাসি", // بنگالی
-  "હું તને પ્રેમ કરું છું", // گجراتی
-  "ฉันรักคุณ" // تایلندی
+   <script>
+const loveWords = [
+    "I love you",
+    "دوستت دارم",
+    "Je t’aime",
+    "Te amo",
+    "Ti amo",
+    "Ich liebe dich",
+    "Seni seviyorum",
+    "Я тебя люблю",
+    "愛してる",
+    "사랑해",
+    "我爱你",
+    "أحبك",
+    "Eu te amo",
+    "Ik hou van jou",
+    "Kocham cię",
+    "Mahal kita",
+    "Anh yêu em",
+    "Я тебя кохаю",
+    "Σ’ αγαπώ",
+    "אני אוהב אותך",
+    "รักคุณ"
 ];
 
-word.textContent = loveWords[i];
-            word.style.left=x+"%";
-            word.style.top=y+"%";
-            word.style.animationDelay = (i < 14 ? i * 0.35 : 4.9 + (i - 14) * 0.55) + "s";
-  heart.appendChild(word);
+const heart = document.getElementById("heartWords");
+heart.innerHTML = "";
+
+const rows = [
+    { y: 12, width: 24 },
+    { y: 17, width: 38 },
+    { y: 22, width: 48 },
+    { y: 27, width: 56 },
+    { y: 32, width: 64 },
+    { y: 37, width: 70 },
+    { y: 42, width: 74 },
+    { y: 47, width: 76 },
+    { y: 52, width: 74 },
+    { y: 57, width: 68 },
+    { y: 62, width: 58 },
+    { y: 67, width: 46 },
+    { y: 72, width: 32 },
+    { y: 77, width: 16 }
+];
+
+let wordIndex = 0;
+
+rows.forEach((row, rowIndex) => {
+    const count = Math.max(1, Math.floor(row.width / 10));
+
+    for (let j = 0; j < count; j++) {
+        const word = document.createElement("span");
+        word.className = "heart-word";
+        word.textContent = loveWords[wordIndex % loveWords.length];
+
+        const x = 50 - row.width / 2 +
+            (row.width / count) * (j + 0.5);
+
+        word.style.left = x + "%";
+        word.style.top = row.y + "%";
+        word.style.animationDelay =
+            (wordIndex * 0.08) + "s";
+
+        heart.appendChild(word);
+        wordIndex++;
+    }
 });
+</script>
 </script>
     <!-- =========================
          INTRO
