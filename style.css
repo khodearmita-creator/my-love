@@ -408,7 +408,7 @@ body {
 
     position: fixed;
 
-    transition: left .15s ease, top 15s ease;
+    transition: left .22s ease-out, top .22s ease-out;
 }
 
 
@@ -472,11 +472,16 @@ body {
 }
 
 
+.reason.first-reason {
+    margin-bottom: 35vh;
+}
+
+
 .reason.special {
     font-size: 35px;
 
-    margin-top: 300px;
-    margin-bottom: 600px;
+    margin-top: 70vh;
+    margin-bottom: 70vh;
 
     display: flex;
 
@@ -536,17 +541,17 @@ body {
         padding-left: 5%;
         padding-right: 5%;
 
-        gap: 40vh;
+        gap: 0;
     }
     .final-reason{
         margin-top: 25vh;
     }
     .reason{
-        margin-top: 10px;
+        margin-top: 0;
     }
     .reason.special{
-        margin-top: 500px;
-        margin-bottom: 300px;
+        margin-top: 70vh;
+        margin-bottom: 70vh;
 
         min-height: auto;
         display: block;
