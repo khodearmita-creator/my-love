@@ -30,7 +30,30 @@
         words.forEach(([x,y],i)=>{
             const word= document.createElement("span");
             word.className="heart=word";
-            word.textcontent=" I love you";
+           const loveWords = [
+  "دوستت دارم", // فارسی
+  "I love you", // انگلیسی
+  "Je t'aime", // فرانسوی
+  "Te amo", // اسپانیایی
+  "Ti amo", // ایتالیایی
+  "Ich liebe dich", // آلمانی
+  "Я тебя люблю", // روسی
+  "愛してる", // ژاپنی
+  "사랑해", // کره‌ای
+  "我爱你", // چینی
+  "أحبك", // عربی
+  "Seni seviyorum", // ترکی
+  "Eu te amo", // پرتغالی
+  "Ik hou van jou", // هلندی
+  "Kocham cię", // لهستانی
+  "Mahal kita", // فیلیپینی
+  "אני אוהב אותך", // عبری
+  "আমি তোমাকে ভালোবাসি", // بنگالی
+  "હું તને પ્રેમ કરું છું", // گجراتی
+  "ฉันรักคุณ" // تایلندی
+];
+
+word.textContent = loveWords[i];
             word.style.left=x+"%";
             word.style.top=y+"%";
             word.style.animationDelay = (i < 14 ? i * 0.35 : 4.9 + (i - 14) * 0.55) + "s";
