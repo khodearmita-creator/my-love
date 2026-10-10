@@ -193,9 +193,10 @@ window.addEventListener("load", () => {
     void el.offsetWidth;
     el.style.animation = "";
 });
-   setTimeout(() => {
-    showLoveQuestion();
-}, 12000);
+    setTimeout(() => {
+       intro.classList.add("hidden");
+       loveQuestion.classList.remove("hidden");
+   }, 12000);
         }, 1200);
 
     }, 11000);
