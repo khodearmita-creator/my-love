@@ -188,6 +188,11 @@ window.addEventListener("load", () => {
         setTimeout(() => {
             heartSection.style.display = "none";
             intro.classList.remove("hidden");
+           [hello, relationship, joke].forEach(el => {
+    el.style.animation = "none";
+    void el.offsetWidth;
+    el.style.animation = "";
+});
         }, 1200);
 
     }, 11000);
