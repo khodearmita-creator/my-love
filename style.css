@@ -582,19 +582,46 @@ body {
 
 .heart-words {
     position: relative;
-    width: min(95vw, 560px);
-    height: min(95vw, 560px);
+    width: min(98vw, 620px);
+    height: min(98vw, 620px);
+    direction: ltr;
+}
+
+.heart-row {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+    white-space: nowrap;
 }
 
 .heart-word {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    color: #ff789f;
-    font-size: clamp(9px, 2.5vw, 17px);
-    white-space: nowrap;
+    --c: #ff3b3b;
+    flex: none;
+    color: var(--c);
+    font-weight: 500;
+    unicode-bidi: isolate;
     opacity: 0;
-    text-shadow: 0 0 8px #ff174f;
+    text-shadow: 0 0 6px rgba(255, 30, 30, 0.55);
     animation: heartFade 1.2s ease forwards;
+}
+
+.heart-word.bright {
+    --c: #ffb8b8;
+}
+
+@keyframes heartTwinkle {
+    0%, 30%, 100% {
+        color: var(--c);
+        scale: 1;
+        text-shadow: 0 0 6px rgba(255, 30, 30, 0.55);
+    }
+    14% {
+        color: #fff;
+        scale: 1.1;
+        text-shadow: 0 0 6px #fff, 0 0 14px #ff5a5a, 0 0 24px #ff1e1e;
+    }
 }
 
 @keyframes heartFade {
